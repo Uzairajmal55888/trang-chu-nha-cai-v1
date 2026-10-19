@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đang chuyển hướng... | kuwin.to</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#fafafa;color:#111;font-family:-apple-system,'Segoe UI',Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .wrap{text-align:center;padding:24px;max-width:520px}
+  .brand{font-size:.85rem;letter-spacing:.55rem;color:#999;text-transform:uppercase;margin-bottom:34px}
+  .clock{font-size:8rem;font-weight:100;color:#111;line-height:1;min-height:9rem;font-variant-numeric:tabular-nums}
+  .dots{display:flex;gap:10px;justify-content:center;margin:28px 0}
+  .dot{width:10px;height:10px;border-radius:50%;background:#e0e0e0;transition:background .4s}
+  .dot.on{background:#111}
+  .bar{width:min(360px,78vw);height:3px;background:#ececec;border-radius:99px;margin:0 auto;overflow:hidden}
+  #fill{height:100%;width:0%;background:#111;border-radius:99px;transition:width 1s linear}
+  .msg{margin-top:28px;color:#555;font-size:1rem}
+  .msg strong{color:#111}
+  .fallback{margin-top:12px;font-size:.82rem;color:#aaa}
+  .fallback a{color:#111}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Kuwin</div>
+  <div class="clock"><span id="num">5</span></div>
+  <div class="dots" id="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></div>
+  <div class="bar"><div id="fill"></div></div>
+  <p class="msg">Đang chuyển hướng đến <strong>kuwin.to</strong></p>
+  <p class="fallback">Nếu không tự động chuyển hướng, <a href="https://kuwin.to">nhấn vào đây</a>.</p>
+</div>
+<script>
+(function(){
+  var t=5,total=5,num=document.getElementById('num'),fill=document.getElementById('fill'),
+      dots=document.getElementById('dots').children;
+  var iv=setInterval(function(){
+    t--;
+    if(t<=0){clearInterval(iv);window.location.href='https://kuwin.to';return;}
+    num.textContent=t;
+    fill.style.width=((total-t)/total*100)+'%';
+    for(var i=0;i<dots.length;i++){dots[i].className='dot'+(i<t?' on':'');}
+  },1000);
+})();
+</script>
+</body>
+</html>
